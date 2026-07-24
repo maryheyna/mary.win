@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('components.layouts.auth')]
+#[Layout('components.layouts.winrar-auth', ['title' => 'Verify email'])]
 class VerifyEmail extends Component
 {
     /**

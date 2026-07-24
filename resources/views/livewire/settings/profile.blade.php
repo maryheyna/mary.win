@@ -1,42 +1,44 @@
-<section class="w-full">
+<section>
     @include('partials.settings-heading')
 
     <x-settings.layout :heading="__('Profile')" :subheading="__('Update your name and email address')">
-        <form wire:submit="updateProfileInformation" class="my-6 w-full space-y-6">
-            <flux:input wire:model="name" :label="__('Name')" type="text" required autofocus autocomplete="name" />
+        <form wire:submit="updateProfileInformation" class="wrs-form">
+            <!-- Name -->
+            <div class="wr-field">
+                <label class="wr-field__label" for="name">{{ __('Name') }}</label>
+                <input id="name" wire:model="name" type="text" class="wr-input" required autofocus autocomplete="name">
+                @error('name') <p class="wr-error">{{ $message }}</p> @enderror
+            </div>
 
-            <div>
-                <flux:input wire:model="email" :label="__('Email')" type="email" required autocomplete="email" />
+            <!-- Email -->
+            <div class="wr-field">
+                <label class="wr-field__label" for="email">{{ __('Email') }}</label>
+                <input id="email" wire:model="email" type="email" class="wr-input" required autocomplete="email">
+                @error('email') <p class="wr-error">{{ $message }}</p> @enderror
 
-                @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail &&! auth()->user()->hasVerifiedEmail())
-                    <div>
-                        <flux:text class="mt-4">
-                            {{ __('Your email address is unverified.') }}
+                @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! auth()->user()->hasVerifiedEmail())
+                    <p class="wr-hint" style="margin-top: 8px;">
+                        {{ __('Your email address is unverified.') }}
+                        <a href="#" wire:click.prevent="resendVerificationNotification">
+                            {{ __('Click here to re-send the verification email.') }}
+                        </a>
+                    </p>
 
-                            <flux:link class="text-sm cursor-pointer" wire:click.prevent="resendVerificationNotification">
-                                {{ __('Click here to re-send the verification email.') }}
-                            </flux:link>
-                        </flux:text>
-
-                        @if (session('status') === 'verification-link-sent')
-                            <flux:text class="mt-2 font-medium !dark:text-green-400 !text-green-600">
-                                {{ __('A new verification link has been sent to your email address.') }}
-                            </flux:text>
-                        @endif
-                    </div>
+                    @if (session('status') === 'verification-link-sent')
+                        <p class="wr-saved" style="margin-top: 6px;">
+                            {{ __('A new verification link has been sent to your email address.') }}
+                        </p>
+                    @endif
                 @endif
             </div>
 
-            <div class="flex items-center gap-4">
-                <div class="flex items-center justify-end">
-                    <flux:button variant="primary" type="submit" class="w-full">{{ __('Save') }}</flux:button>
-                </div>
-
-                <x-action-message class="me-3" on="profile-updated">
-                    {{ __('Saved.') }}
-                </x-action-message>
+            <div class="wrs-actions">
+                <button type="submit" class="wr-btn wr-btn--cta">{{ __('Save') }}</button>
+                <x-action-message class="wr-saved" on="profile-updated">{{ __('Saved.') }}</x-action-message>
             </div>
         </form>
+
+        <hr class="wrs-sep">
 
         <livewire:settings.delete-user-form />
     </x-settings.layout>

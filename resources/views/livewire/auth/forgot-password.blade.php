@@ -1,25 +1,37 @@
- <div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Forgot password')" :description="__('Enter your email to receive a password reset link')" />
+<div class="wra">
+    <div class="wra__head">
+        <p class="wr-entry"><span class="wr-dot" aria-hidden="true"></span>LOST THE KEY</p>
+        <h1 class="wra__title">Forgot <span class="wr-em">password.</span></h1>
+        <p class="wra__lede">{{ __('Enter your email to receive a password reset link.') }}</p>
+    </div>
 
     <!-- Session Status -->
-    <x-auth-session-status class="text-center" :status="session('status')" />
+    @if (session('status'))
+        <div class="wr-status wra-status">{{ session('status') }}</div>
+    @endif
 
-    <form wire:submit="sendPasswordResetLink" class="flex flex-col gap-6">
-        <!-- Email Address -->
-        <flux:input
-            wire:model="email"
-            :label="__('Email Address')"
-            type="email"
-            required
-            autofocus
-            placeholder="email@example.com"
-        />
+    <div class="wr-plate">
+        <div class="wr-plate__head">
+            <span class="wr-label">Reset Link</span>
+            <span class="wr-plate__bar" aria-hidden="true"></span>
+        </div>
+        <div class="wr-plate__body">
+            <form wire:submit="sendPasswordResetLink" class="wra-form">
+                <!-- Email Address -->
+                <div class="wr-field">
+                    <label class="wr-field__label" for="email">{{ __('Email address') }}</label>
+                    <input id="email" wire:model="email" type="email" class="wr-input" required autofocus
+                        placeholder="email@example.com">
+                    @error('email') <p class="wr-error">{{ $message }}</p> @enderror
+                </div>
 
-        <flux:button variant="primary" type="submit" class="w-full">{{ __('Email password reset link') }}</flux:button>
-    </form>
-
-    <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-400">
-        <span>{{ __('Or, return to') }}</span>
-        <flux:link :href="route('login')" wire:navigate>{{ __('log in') }}</flux:link>
+                <button type="submit" class="wr-btn wr-btn--cta wr-btn--block">{{ __('Email password reset link') }} →</button>
+            </form>
+        </div>
     </div>
+
+    <p class="wra__foot">
+        {{ __('Or, return to') }}
+        <a href="{{ route('login') }}" wire:navigate>{{ __('log in') }}</a>
+    </p>
 </div>

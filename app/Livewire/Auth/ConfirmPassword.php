@@ -7,7 +7,7 @@ use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('components.layouts.auth')]
+#[Layout('components.layouts.winrar-auth', ['title' => 'Confirm password'])]
 class ConfirmPassword extends Component
 {
     public string $password = '';

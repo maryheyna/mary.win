@@ -5,8 +5,11 @@
    Candy pastels on deep teal ink, arranged like a spec sheet,
    lit like an arcade after dark.
 
-   Theme scope:  [data-theme="dark"]   on <html>
-   Prism scope:  [data-variant="full"] on <html>
+   Theme scope:  [data-theme="dark"] on <html>
+
+   Prism: this site is fixed at "ledger" — the rainbow stays
+   rationed to hairlines, header bars and solid W marks. The
+   "full" variant lives in the upstream design system only.
    ============================================================ */
 
 /* ------------------------------------------------------------
@@ -170,20 +173,11 @@ button {
     --shadow-card: 3px 4px 0 rgba(22, 80, 80, 0.13);
     --glow: none;
 
-    /* prism defaults (= "ledger": rainbow rationed) */
-    --wfill: currentColor;
-    --band-w: 0px;
-    --d-full: none;
+    /* CTA surface — ledger prism: solid accent, rainbow stays rationed */
     --cta-bg: var(--accent);
     --cta-fg: var(--bg);
     --cta-bd: transparent;
     --cta-glow: none;
-
-    /* the PRISM switch segments */
-    --seg-l-bg: var(--ink);
-    --seg-l-fg: var(--bg);
-    --seg-f-bg: transparent;
-    --seg-f-fg: var(--muted);
 
     /* motion: quick, cheap, honest */
     --ease: cubic-bezier(0.2, 0, 0, 1);
@@ -204,26 +198,6 @@ button {
     --cta-glow: var(--glow);
 }
 
-/* prism "full": the rainbow goes structural */
-[data-variant='full'] {
-    --wfill: transparent;
-    --band-w: 12px;
-    --d-full: block;
-    --cta-bg: var(--rb-cta);
-    --cta-fg: var(--ink-900);
-    --cta-bd: var(--line);
-    --seg-l-bg: transparent;
-    --seg-l-fg: var(--muted);
-    --seg-f-bg: var(--ink);
-    --seg-f-fg: var(--bg);
-}
-
-[data-variant='full'][data-theme='dark'] {
-    --cta-fg: var(--night-950);
-    --cta-bd: transparent;
-    --cta-glow: 0 0 22px #f5a3d344;
-}
-
 /* ============================================================
    CHASSIS
    ============================================================ */
@@ -238,27 +212,10 @@ button {
     transition: background-color 0.25s var(--ease), color 0.25s var(--ease);
 }
 
-/* the fixed left spectrum band — full prism only */
-.wr-band {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: var(--band-w);
-    background: var(--rb-v);
-    z-index: 60;
-    transition: width 0.25s var(--ease);
-}
-
 /* the 4px rainbow hairline — atop every page, repeated in the footer */
 .wr-rainbow {
     height: 4px;
     background: var(--rb);
-}
-
-.wr-shift {
-    margin-left: var(--band-w);
-    transition: margin 0.25s var(--ease);
 }
 
 .wr-wrap {
@@ -439,6 +396,152 @@ button {
     font-weight: 600;
 }
 
+.wr-btn--block {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.wr-btn--danger {
+    background: transparent;
+    color: var(--pop);
+    border-color: var(--pop);
+}
+
+.wr-btn--danger:hover {
+    background: var(--pop);
+    color: var(--plate);
+}
+
+/* ============================================================
+   FORMS — inputs, fields, checkboxes. Shared by the auth
+   screens and the account settings panel. Built on the tokens
+   so they stay theme-aware in light and dark.
+   ============================================================ */
+.wr-field {
+    display: grid;
+    gap: 7px;
+}
+
+.wr-field__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    font-size: var(--text-label-size);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.wr-input,
+.wr-textarea {
+    width: 100%;
+    padding: 11px 13px;
+    background: var(--plate);
+    border: 1px solid var(--line);
+    border-radius: 0;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 13px;
+}
+
+.wr-input::placeholder,
+.wr-textarea::placeholder {
+    color: var(--muted);
+}
+
+.wr-input:focus,
+.wr-textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+}
+
+.wr-input:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.wr-input-wrap {
+    position: relative;
+}
+
+.wr-input-wrap .wr-input {
+    padding-right: 58px;
+}
+
+.wr-reveal {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 4px 6px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-2);
+}
+
+.wr-error {
+    color: var(--pop);
+    font-size: 11px;
+    margin: 0;
+}
+
+.wr-hint {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.wr-check-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    cursor: pointer;
+}
+
+.wr-check-row input[type='checkbox'] {
+    width: 15px;
+    height: 15px;
+    accent-color: var(--accent);
+    flex: none;
+}
+
+.wr-check-row span {
+    font-size: 12px;
+    color: var(--soft);
+}
+
+/* the little "Saved." confirmation shown next to a submit button */
+.wr-saved {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--teal-mid);
+}
+
+/* a flash / status banner (success by default; --error variant for pop) */
+.wr-status {
+    border: 1px solid var(--line);
+    border-left-width: 4px;
+    border-left-color: var(--aqua-bright);
+    background: var(--plate);
+    color: var(--ink);
+    padding: 11px 14px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.wr-status--error {
+    border-left-color: var(--pop);
+}
+
 /* ============================================================
    MASTHEAD
    ============================================================ */
@@ -612,23 +715,19 @@ button {
     white-space: nowrap;
 }
 
-/* W marks — mono 600, one --wcol-n per row, cycling.
-   Ledger: solid. Full prism: gradient text. */
+/* W marks — mono 600, solid, one --wcol-n per row, cycling. */
 .wr-w {
     font-weight: 600;
     width: 14px;
     flex: none;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: var(--wfill);
 }
 
-.wr-w-1 { background-image: var(--wgrad-1); color: var(--wcol-1); }
-.wr-w-2 { background-image: var(--wgrad-2); color: var(--wcol-2); }
-.wr-w-3 { background-image: var(--wgrad-3); color: var(--wcol-3); }
-.wr-w-4 { background-image: var(--wgrad-4); color: var(--wcol-4); }
-.wr-w-5 { background-image: var(--wgrad-5); color: var(--wcol-5); }
-.wr-w-6 { background-image: var(--wgrad-6); color: var(--wcol-6); }
+.wr-w-1 { color: var(--wcol-1); }
+.wr-w-2 { color: var(--wcol-2); }
+.wr-w-3 { color: var(--wcol-3); }
+.wr-w-4 { color: var(--wcol-4); }
+.wr-w-5 { color: var(--wcol-5); }
+.wr-w-6 { color: var(--wcol-6); }
 
 /* ============================================================
    STAMP — rationed pop. One per view.
@@ -778,56 +877,6 @@ button {
 }
 
 /* ============================================================
-   PRISM SWITCH — floating chrome, hard offset shadow
-   ============================================================ */
-.wr-prism {
-    position: fixed;
-    right: 24px;
-    bottom: 24px;
-    z-index: 70;
-    font-family: var(--font-mono);
-    border: 1.5px solid var(--line);
-    background-color: var(--plate);
-    box-shadow: var(--shadow-pop), 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.wr-prism__row {
-    display: flex;
-    align-items: center;
-}
-
-.wr-prism__label {
-    font-size: var(--text-label-size);
-    letter-spacing: 0.16em;
-    font-weight: 600;
-    color: var(--ink);
-    padding: 0 12px;
-}
-
-.wr-prism__seg {
-    font-family: var(--font-mono);
-    font-size: var(--text-nav-size);
-    letter-spacing: var(--text-label-tracking);
-    font-weight: 600;
-    padding: 12px 16px;
-    border: none;
-    border-left: 1.5px solid var(--line);
-    border-radius: 0;
-    cursor: pointer;
-    transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
-}
-
-.wr-prism__seg--ledger {
-    background: var(--seg-l-bg);
-    color: var(--seg-l-fg);
-}
-
-.wr-prism__seg--full {
-    background: var(--seg-f-bg);
-    color: var(--seg-f-fg);
-}
-
-/* ============================================================
    RESPONSIVE
    The system is a 980px spec sheet; below that it stacks.
    ============================================================ */
@@ -887,15 +936,6 @@ button {
     .wr-row {
         flex-wrap: wrap;
         gap: 8px 10px;
-    }
-
-    .wr-prism {
-        right: 12px;
-        bottom: 12px;
-    }
-
-    .wr-prism__seg {
-        padding: 10px 12px;
     }
 }
 

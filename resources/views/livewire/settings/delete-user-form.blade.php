@@ -1,34 +1,31 @@
-<section class="mt-10 space-y-6">
-    <div class="relative mb-5">
-        <flux:heading>{{ __('Delete account') }}</flux:heading>
-        <flux:subheading>{{ __('Delete your account and all of its resources') }}</flux:subheading>
+<section class="wrs-danger" style="padding-left: 16px; margin-top: 4px;"
+    x-data="{ confirming: {{ $errors->has('password') ? 'true' : 'false' }} }">
+    <div style="margin-bottom: 12px;">
+        <p class="wr-field__label" style="justify-content: flex-start; color: var(--pop);">{{ __('Delete account') }}</p>
+        <p class="wr-hint" style="margin-top: 6px;">
+            {{ __('Delete your account and all of its resources. This action cannot be undone.') }}
+        </p>
     </div>
 
-    <flux:modal.trigger name="confirm-user-deletion">
-        <flux:button variant="danger" x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
-            {{ __('Delete account') }}
-        </flux:button>
-    </flux:modal.trigger>
+    <button type="button" class="wr-btn wr-btn--danger" x-show="!confirming" @click="confirming = true">
+        {{ __('Delete account') }}
+    </button>
 
-    <flux:modal name="confirm-user-deletion" :show="$errors->isNotEmpty()" focusable class="max-w-lg">
-        <form wire:submit="deleteUser" class="space-y-6">
-            <div>
-                <flux:heading size="lg">{{ __('Are you sure you want to delete your account?') }}</flux:heading>
-
-                <flux:subheading>
-                    {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
-                </flux:subheading>
+    <div x-show="confirming" x-cloak>
+        <p class="wr-hint" style="margin-bottom: 12px;">
+            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm.') }}
+        </p>
+        <form wire:submit="deleteUser" class="wrs-form" style="max-width: 340px;">
+            <div class="wr-field">
+                <label class="wr-field__label" for="delete_password">{{ __('Password') }}</label>
+                <input id="delete_password" wire:model="password" type="password" class="wr-input"
+                    placeholder="{{ __('Confirm your password') }}">
+                @error('password') <p class="wr-error">{{ $message }}</p> @enderror
             </div>
-
-            <flux:input wire:model="password" :label="__('Password')" type="password" />
-
-            <div class="flex justify-end space-x-2 rtl:space-x-reverse">
-                <flux:modal.close>
-                    <flux:button variant="filled">{{ __('Cancel') }}</flux:button>
-                </flux:modal.close>
-
-                <flux:button variant="danger" type="submit">{{ __('Delete account') }}</flux:button>
+            <div class="wrs-actions">
+                <button type="submit" class="wr-btn wr-btn--danger">{{ __('Delete account') }}</button>
+                <button type="button" class="wr-btn wr-btn--quiet" @click="confirming = false">{{ __('Cancel') }}</button>
             </div>
         </form>
-    </flux:modal>
+    </div>
 </section>

@@ -1,38 +1,35 @@
-<section class="w-full">
+<section>
     @include('partials.settings-heading')
 
     <x-settings.layout :heading="__('Update password')" :subheading="__('Ensure your account is using a long, random password to stay secure')">
-        <form wire:submit="updatePassword" class="mt-6 space-y-6">
-            <flux:input
-                wire:model="current_password"
-                :label="__('Current password')"
-                type="password"
-                required
-                autocomplete="current-password"
-            />
-            <flux:input
-                wire:model="password"
-                :label="__('New password')"
-                type="password"
-                required
-                autocomplete="new-password"
-            />
-            <flux:input
-                wire:model="password_confirmation"
-                :label="__('Confirm Password')"
-                type="password"
-                required
-                autocomplete="new-password"
-            />
+        <form wire:submit="updatePassword" class="wrs-form">
+            <!-- Current password -->
+            <div class="wr-field">
+                <label class="wr-field__label" for="current_password">{{ __('Current password') }}</label>
+                <input id="current_password" wire:model="current_password" type="password" class="wr-input" required
+                    autocomplete="current-password">
+                @error('current_password') <p class="wr-error">{{ $message }}</p> @enderror
+            </div>
 
-            <div class="flex items-center gap-4">
-                <div class="flex items-center justify-end">
-                    <flux:button variant="primary" type="submit" class="w-full">{{ __('Save') }}</flux:button>
-                </div>
+            <!-- New password -->
+            <div class="wr-field">
+                <label class="wr-field__label" for="password">{{ __('New password') }}</label>
+                <input id="password" wire:model="password" type="password" class="wr-input" required
+                    autocomplete="new-password">
+                @error('password') <p class="wr-error">{{ $message }}</p> @enderror
+            </div>
 
-                <x-action-message class="me-3" on="password-updated">
-                    {{ __('Saved.') }}
-                </x-action-message>
+            <!-- Confirm password -->
+            <div class="wr-field">
+                <label class="wr-field__label" for="password_confirmation">{{ __('Confirm Password') }}</label>
+                <input id="password_confirmation" wire:model="password_confirmation" type="password" class="wr-input"
+                    required autocomplete="new-password">
+                @error('password_confirmation') <p class="wr-error">{{ $message }}</p> @enderror
+            </div>
+
+            <div class="wrs-actions">
+                <button type="submit" class="wr-btn wr-btn--cta">{{ __('Save') }}</button>
+                <x-action-message class="wr-saved" on="password-updated">{{ __('Saved.') }}</x-action-message>
             </div>
         </form>
     </x-settings.layout>

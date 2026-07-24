@@ -26,7 +26,7 @@
             'title' => 'four letter words',
             'bar' => 'wgrad-1',
             'text' => 'an off-by-one spelling game. change a letter, make a word, keep the streak. hesitation allowed; repeats aren’t.',
-            'url' => '#',
+            'url' => route('games.four-letter-words'),
         ],
         [
             'title' => 'license plate game',
@@ -45,7 +45,7 @@
     ];
 @endphp
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light" data-variant="ledger">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light">
 
 <head>
     <meta charset="utf-8" />
@@ -66,14 +66,12 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap"
         rel="stylesheet">
 
-    {{-- Restore theme + prism before first paint so neither flashes. --}}
+    {{-- Restore theme before first paint so it doesn't flash. --}}
     <script>
         (function () {
             try {
                 var t = localStorage.getItem('winrar-theme');
-                var v = localStorage.getItem('winrar-variant');
                 if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
-                if (v === 'ledger' || v === 'full') document.documentElement.dataset.variant = v;
             } catch (e) { }
         })();
     </script>
@@ -83,11 +81,8 @@
 
 <body>
     <div class="wr">
-        {{-- structural spectrum band — shows in full prism only --}}
-        <div class="wr-band" aria-hidden="true"></div>
-
         {{-- ============ HEADER ============ --}}
-        <header class="wr-header wr-shift">
+        <header class="wr-header">
             <div class="wr-rainbow" aria-hidden="true"></div>
             <div class="wr-header__bar">
                 <span class="wr-wordmark">MARY.WIN</span>
@@ -103,7 +98,7 @@
             </div>
         </header>
 
-        <div class="wr-shift">
+        <main>
             {{-- ============ HERO ============ --}}
             <section class="wr-hero">
                 <div class="wr-hero__aurora" aria-hidden="true"></div>
@@ -222,66 +217,34 @@
                     </div>
                 </div>
             </section>
+        </main>
 
-            {{-- ============ FOOTER ============ --}}
-            <footer class="wr-footer">
-                <div class="wr-wrap wr-footer__bar">
-                    <span>MARY.WIN — SEASON {{ now()->year }}</span>
-                    <span>FINAL SCORE: MARY 42 · DOUBT 0</span>
-                </div>
-                <div class="wr-rainbow" aria-hidden="true"></div>
-            </footer>
-        </div>
-
-        {{-- ============ PRISM SWITCH ============ --}}
-        <div class="wr-prism">
-            <div class="wr-rainbow" aria-hidden="true"></div>
-            <div class="wr-prism__row" role="group" aria-label="Prism intensity">
-                <span class="wr-prism__label">PRISM</span>
-                <button type="button" class="wr-prism__seg wr-prism__seg--ledger" data-variant-set="ledger"
-                    aria-pressed="true">LEDGER</button>
-                <button type="button" class="wr-prism__seg wr-prism__seg--full" data-variant-set="full"
-                    aria-pressed="false">FULL</button>
+        {{-- ============ FOOTER ============ --}}
+        <footer class="wr-footer">
+            <div class="wr-wrap wr-footer__bar">
+                <span>MARY.WIN — SEASON {{ now()->year }}</span>
+                <span>FINAL SCORE: MARY 42 · DOUBT 0</span>
             </div>
-        </div>
+            <div class="wr-rainbow" aria-hidden="true"></div>
+        </footer>
     </div>
 
     <script>
         (function () {
             var root = document.documentElement;
+            var toggle = document.querySelector('[data-theme-toggle]');
 
-            function store(key, val) {
-                try { localStorage.setItem('winrar-' + key, val); } catch (e) { }
+            function sync() {
+                toggle.textContent = root.dataset.theme === 'dark' ? '☀ LIGHTS ON' : '☾ LIGHTS OFF';
             }
 
-            function syncTheme() {
-                var dark = root.dataset.theme === 'dark';
-                document.querySelector('[data-theme-toggle]').textContent = dark ? '☀ LIGHTS ON' : '☾ LIGHTS OFF';
-            }
-
-            function syncVariant() {
-                var variant = root.dataset.variant;
-                document.querySelectorAll('[data-variant-set]').forEach(function (btn) {
-                    btn.setAttribute('aria-pressed', String(btn.dataset.variantSet === variant));
-                });
-            }
-
-            document.querySelector('[data-theme-toggle]').addEventListener('click', function () {
+            toggle.addEventListener('click', function () {
                 root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-                store('theme', root.dataset.theme);
-                syncTheme();
+                try { localStorage.setItem('winrar-theme', root.dataset.theme); } catch (e) { }
+                sync();
             });
 
-            document.querySelectorAll('[data-variant-set]').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    root.dataset.variant = btn.dataset.variantSet;
-                    store('variant', root.dataset.variant);
-                    syncVariant();
-                });
-            });
-
-            syncTheme();
-            syncVariant();
+            sync();
         })();
     </script>
 </body>

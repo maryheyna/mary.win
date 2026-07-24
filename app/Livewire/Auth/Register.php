@@ -10,7 +10,7 @@ use Illuminate\Validation\Rules;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('components.layouts.auth')]
+#[Layout('components.layouts.winrar-auth', ['title' => 'Create an account'])]
 class Register extends Component
 {
     public string $name = '';
