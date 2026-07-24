@@ -35,4 +35,21 @@ return [
         ],
     ],
 
+    // GitHub OAuth (Socialite). Grants `repo` scope for private-repo reading, so the
+    // access/refresh tokens are stored encrypted on the User model (see the `encrypted` casts).
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => env('GITHUB_REDIRECT_URI', rtrim((string) env('APP_URL'), '/') . '/auth/github/callback'),
+    ],
+
+    // AI code-analysis backend. Swappable between Langflow / LangChain / LangGraph
+    // by changing the endpoint (and driver, when a backend needs bespoke handling).
+    'analyzer' => [
+        'driver' => env('AI_ANALYZER', 'null'), // null | langflow | langchain | langgraph
+        'endpoint' => env('AI_ANALYZER_ENDPOINT'),
+        'api_key' => env('AI_ANALYZER_API_KEY'),
+        'timeout' => (int) env('AI_ANALYZER_TIMEOUT', 60),
+    ],
+
 ];
