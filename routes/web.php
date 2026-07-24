@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Games\FourLetterWords;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -13,6 +14,9 @@ Route::get('/', function () {
 Route::get('/omt', function () {
     return view('welcome');
 })->name('omt');
+
+// The arcade.
+Route::get('/games/four-letter-words', FourLetterWords::class)->name('games.four-letter-words');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
