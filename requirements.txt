@@ -1,0 +1,10 @@
+# Reference only — dependencies for an EXTERNAL Python AI-analysis backend.
+#
+# The Laravel app does NOT run Python. It talks to any AI backend over HTTP via
+# the CodeAnalyzer boundary (see docs/AI_ANALYZER.md). These are the packages a
+# Langflow-based backend would need if you choose to stand one up separately.
+streamlit
+langflow
+python-dotenv
+requests>=2.28.0
+urllib3>=1.26.0
