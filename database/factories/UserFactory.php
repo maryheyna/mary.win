@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends Factory<User>
  */
 class UserFactory extends Factory
 {
@@ -39,6 +40,18 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    /**
+     * A user connected to GitHub (with tokens, as after OAuth).
+     */
+    public function withGithub(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'github_id' => (string) fake()->unique()->numberBetween(1000, 9_999_999),
+            'github_token' => 'gho_'.Str::random(36),
+            'github_refresh_token' => 'ghr_'.Str::random(36),
         ]);
     }
 }
