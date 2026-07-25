@@ -187,10 +187,15 @@ button {
 [data-theme='dark'] {
     --hero-grad: linear-gradient(100deg, var(--pink), var(--peach) 28%, var(--gold) 52%, var(--aqua) 78%, var(--peri));
     --rb-cta: linear-gradient(90deg, var(--pink), var(--gold), var(--aqua));
-    --wash: none;
-    --aurora: radial-gradient(60% 100% at 18% 30%, #f5a3d333, transparent 70%),
-        radial-gradient(50% 90% at 50% 10%, #edd98b2e, transparent 70%),
-        radial-gradient(60% 100% at 85% 35%, #4dcbcb3d, transparent 70%);
+    /* the aurora is now the whole page: viewport-anchored radial glows
+       washed over the night bg (the chassis paints --wash with
+       background-attachment: fixed, so it spans the full background). */
+    --wash: radial-gradient(58% 48% at 14% 12%, #f5a3d329, transparent 62%),
+        radial-gradient(52% 44% at 50% 4%, #edd98b21, transparent 58%),
+        radial-gradient(62% 52% at 88% 16%, #4dcbcb3a, transparent 62%),
+        radial-gradient(85% 65% at 50% 118%, #8dc6d81c, transparent 60%);
+    /* retired: the wash above covers the hero, so the local band would double up. */
+    --aurora: none;
     --dot-display: inline-block;
     --shadow-card: 3px 4px 0 rgba(0, 0, 0, 0.3);
     --glow: 0 0 18px #4dcbcb44;
