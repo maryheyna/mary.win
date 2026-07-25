@@ -32,7 +32,7 @@
             'title' => 'license plate game',
             'bar' => 'wgrad-4',
             'text' => 'make words out of whatever plate you see. argue about which acronyms should count. the passenger is always right.',
-            'url' => '#',
+            'url' => route('games.license-plates'),
         ],
     ];
 

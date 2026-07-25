@@ -14,11 +14,15 @@
         <testsuite name="FourLetterWords">
             <directory>packages/four-letter-words/tests</directory>
         </testsuite>
+        <testsuite name="LicensePlates">
+            <directory>packages/license-plates/tests</directory>
+        </testsuite>
     </testsuites>
     <source>
         <include>
             <directory>app</directory>
             <directory>packages/four-letter-words/src</directory>
+            <directory>packages/license-plates/src</directory>
         </include>
     </source>
     <php>

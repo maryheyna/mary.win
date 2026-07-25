@@ -3,6 +3,7 @@
 use App\Http\Controllers\RepositoryController;
 use App\Http\Controllers\RepositoryFilesController;
 use App\Livewire\Games\FourLetterWords;
+use App\Livewire\Games\LicensePlates;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -22,6 +23,7 @@ Route::get('/omt', function () {
 
 // The arcade.
 Route::get('/games/four-letter-words', FourLetterWords::class)->name('games.four-letter-words');
+Route::get('/games/license-plates', LicensePlates::class)->name('games.license-plates');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

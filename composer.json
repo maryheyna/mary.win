@@ -32,7 +32,8 @@
             "App\\": "app/",
             "FourLetterWords\\": "packages/four-letter-words/src/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "LicensePlates\\": "packages/license-plates/src/"
         }
     },
     "autoload-dev": {
