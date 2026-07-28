@@ -28,6 +28,12 @@
         // The server re-validates every submit — this copy is advisory, never trusted.
         window.FLW_WORDS = @json(\App\Games\FourLetterWords\WordList::words());
 
+        // The composer types into a real (invisible) text field rather than into the window,
+        // because a soft keyboard only opens for a focused editable element — buttons don't
+        // summon one. The field's value is held at this pad so a backspace always has
+        // something to delete, and every edit is read as a delta against it.
+        const FLW_PAD = '\u00A0'.repeat(4);
+
         // The word composer: a tiny editor for a fixed four-letter field. All editing is
         // local and instant; only an armed submit crosses to the server (the pure core).
         document.addEventListener('alpine:init', () => {
@@ -70,8 +76,68 @@
                     if (this.cursor > 0) this.cursor--;
                 },
 
+                // --- the hidden field: the only thing a phone will open a keyboard for ---
+
+                // Park the value back on the pad, caret at the end, so the next edit is
+                // unambiguous: longer means inserted, shorter means deleted.
+                resetField() {
+                    const el = this.$refs.field;
+                    if (!el) return;
+                    el.value = FLW_PAD;
+                    try { el.setSelectionRange(FLW_PAD.length, FLW_PAD.length); } catch (e) { }
+                },
+
+                // Must run inside the tap that asked for it — iOS only raises the keyboard
+                // for a focus that a user gesture caused. Refocusing an already-focused
+                // field raises nothing, so leave it alone when it already has focus.
+                focusField() {
+                    const el = this.$refs.field;
+                    if (!el || this.status !== 'playing' || document.activeElement === el) return;
+                    el.focus();
+                    this.resetField();
+                },
+
+                // Soft keyboards report edits, not keys (Android sends no usable keydown at
+                // all), so letters and backspace are read here rather than from onKey.
+                onEdit(e) {
+                    const t = e.inputType;
+                    if (!t) return; // no inputType to read — let the edit land and diff it below
+                    if (t === 'insertText' || t === 'insertReplacementText') {
+                        e.preventDefault();
+                        for (const ch of (e.data || '')) this.type(ch);
+                    } else if (t.startsWith('delete')) {
+                        e.preventDefault();
+                        this.backspace();
+                    } else if (t === 'insertLineBreak' || t === 'insertParagraph') {
+                        e.preventDefault();
+                        this.trySubmit();
+                    }
+                },
+
+                // Fallback for keyboards that compose text and so ignore the preventDefault
+                // above: read whatever landed as a delta against the pad, then re-park.
+                onEditFallback(e) {
+                    const v = e.target.value;
+                    if (v === FLW_PAD) return;
+                    if (v.length > FLW_PAD.length) for (const ch of v.slice(FLW_PAD.length)) this.type(ch);
+                    else if (v.length < FLW_PAD.length) this.backspace();
+                    this.resetField();
+                },
+
+                // Only the keys that produce no edit event reach this; letters and backspace
+                // are onEdit's, and taking them here too would apply them twice.
+                onFieldKey(e) {
+                    if (this.status !== 'playing') return;
+                    const k = e.key;
+                    if (k === 'ArrowLeft') { e.preventDefault(); this.left(); }
+                    else if (k === 'ArrowRight') { e.preventDefault(); this.right(); }
+                    else if (k === 'Enter') { e.preventDefault(); this.trySubmit(); }
+                    else if (k === 'ArrowUp' || k === 'ArrowDown' || k === 'Home' || k === 'End') e.preventDefault();
+                },
+
                 onKey(e) {
                     if (this.status !== 'playing') return; // let the end screen use the keyboard normally
+                    if (this.$refs.field && document.activeElement === this.$refs.field) return; // the field has it
                     const k = e.key;
                     if (k === 'ArrowLeft') { e.preventDefault(); this.left(); }
                     else if (k === 'ArrowRight') { e.preventDefault(); this.right(); }
@@ -95,11 +161,13 @@
                         this.reason = res.reason;
                         this.finalStreak = res.streak;
                         this.log = res.log || [];
+                        this.$refs.field?.blur(); // drop the phone keyboard so the end screen is visible
                     }
                 },
 
+                // Reset first, then talk to the server: the field can only take focus (and so
+                // raise the keyboard) while we are still inside the tap that called this.
                 async playAgain() {
-                    await this.$wire.playAgain();
                     this.letters = ['', '', '', ''];
                     this.cursor = 0;
                     this.current = '';
@@ -108,6 +176,8 @@
                     this.reason = null;
                     this.finalStreak = 0;
                     this.log = [];
+                    this.focusField();
+                    await this.$wire.playAgain();
                 },
             }));
         });
@@ -121,6 +191,7 @@
 
         .flw {
             min-height: 100vh;
+            min-height: 100dvh; /* the dynamic unit shrinks under a phone keyboard; vh does not */
             background: var(--bg);
             color: var(--ink);
             font-family: var(--font-mono);
@@ -130,6 +201,7 @@
         .flw .wr-rainbow { flex: 0 0 auto; }
 
         .flw__wrap {
+            position: relative; /* anchors the invisible typing field */
             flex: 1 1 auto;
             width: 100%;
             max-width: 640px;
@@ -169,8 +241,34 @@
         .flw__streak { font-size: 0.7rem; letter-spacing: 0.2em; color: var(--muted); }
         .flw__streak b { color: var(--accent-2); font-size: 1rem; }
 
+        /* Parked over the middle of the wrap, roughly where the boxes are, so that the
+           browser's scroll-the-focused-thing-into-view lands on the boxes and not elsewhere. */
+        .flw__typing {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 70%;
+            height: 3.5rem;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            caret-color: transparent; /* the selected box is the cursor */
+            font-size: 16px;          /* anything smaller and iOS zooms the page on focus */
+            pointer-events: none;     /* taps belong to the boxes underneath */
+        }
+
         .flw__boxes { display: flex; gap: clamp(0.5rem, 2.5vw, 0.9rem); }
         .flw__box {
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
             width: clamp(58px, 17vw, 92px);
             aspect-ratio: 1 / 1;
             background: var(--plate-2);

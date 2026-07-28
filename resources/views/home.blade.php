@@ -1,14 +1,4 @@
 @php
-    // RECORD — SELECTED PROJECTS. W marks cycle through the spectrum in order.
-    $projects = [
-        ['name' => 'reteer', 'meta' => 'volunteer scheduling · laravel, jetstream', 'status' => 'limited alpha', 'url' => '#'],
-        ['name' => 'working title', 'meta' => 'site-testing crawler · flask, postgres', 'status' => 'in development', 'url' => '#'],
-        ['name' => 'mollify', 'meta' => 'flask scaffolding, strong opinions', 'status' => 'in progress', 'url' => '#'],
-        ['name' => 'jobs board', 'meta' => 'for the local tech meetup · laravel', 'status' => 'design phase', 'url' => '#'],
-        ['name' => 'spreadsheet → public api', 'meta' => 'apps script, no shame', 'status' => 'shipped', 'url' => '#'],
-        ['name' => 'this website', 'meta' => 'no longer a twinkle in my eye', 'status' => 'you’re here', 'url' => '#'],
-    ];
-
     $talksGiven = [
         ['title' => 'database-first thinking', 'when' => 'meetup ’25'],
         ['title' => 'a spreadsheet is an api if you’re brave', 'when' => 'meetup ’25'],
@@ -88,7 +78,6 @@
                 <span class="wr-wordmark">MARY.WIN</span>
                 <div class="wr-header__right">
                     <nav class="wr-nav" aria-label="Primary">
-                        <a href="#work">WORK</a>
                         <a href="#talks">TALKS</a>
                         <a href="#games">GAMES</a>
                         <a href="#me">ME</a>
@@ -110,36 +99,11 @@
                         for fun. Projects, talks, and small games, filed below with the score kept honestly.</p>
                     {{-- the one stamp on this view --}}
                     <div class="wr-stamp wr-stamp--hero">PERSONAL BEST</div>
-                    <div class="wr-hero__actions">
-                        <a href="#work" class="wr-btn wr-btn--cta">SEE THE RECORD →</a>
-                        <a href="#me" class="wr-btn wr-btn--quiet">ABOUT ME</a>
-                    </div>
-                </div>
-            </section>
-
-            {{-- ============ WORK / RECORD ============ --}}
-            <section id="work" class="wr-wrap wr-section" style="padding-top: 22px;">
-                <div class="wr-plate">
-                    <div class="wr-plate__head">
-                        <span class="wr-label">RECORD — SELECTED PROJECTS</span>
-                        <span class="wr-plate__bar" aria-hidden="true"></span>
-                    </div>
-                    <div class="wr-plate__body">
-                        @foreach ($projects as $i => $project)
-                            <div class="wr-row">
-                                <span class="wr-w wr-w-{{ ($i % 6) + 1 }}" aria-hidden="true">W</span>
-                                <a href="{{ $project['url'] }}" class="wr-row__name">{{ $project['name'] }}</a>
-                                <span class="wr-meta">{{ $project['meta'] }}</span>
-                                <span class="wr-leader" aria-hidden="true"></span>
-                                <span class="wr-row__status">{{ $project['status'] }}</span>
-                            </div>
-                        @endforeach
-                    </div>
                 </div>
             </section>
 
             {{-- ============ TALKS ============ --}}
-            <section id="talks" class="wr-wrap wr-section">
+            <section id="talks" class="wr-wrap wr-section" style="padding-top: 22px;">
                 <h2 class="wr-display wr-display--h2">Talks, <span class="wr-em">given &amp; loved.</span></h2>
                 <div class="wr-grid-2">
                     <div class="wr-plate">
