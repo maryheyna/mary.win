@@ -15,10 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // TALKS — LOVED comes from the research library shared with clever/landing.
+    // Three of them, reshuffled every load, then shown newest first.
     $talksLoved = ResearchSource::query()
         ->lovedTalks()
         ->with('people')
-        ->get();
+        ->inRandomOrder()
+        ->limit(3)
+        ->get()
+        ->sortByDesc('date_published')
+        ->values();
 
     return view('home', compact('talksLoved'));
 })->name('home');

@@ -19,6 +19,32 @@ function talkSource(array $attributes = []): ResearchSource
     ], $attributes));
 }
 
+/**
+ * The talk titles rendered inside the LOVED — SEE ALSO plate, in page order.
+ *
+ * @return array<int, string>
+ */
+function lovedTitles(string $html): array
+{
+    $start = strpos($html, 'LOVED — SEE ALSO');
+
+    if ($start === false) {
+        return [];
+    }
+
+    // The plate ends where the next section (the arcade) begins.
+    $end = strpos($html, 'arcade', $start);
+    $plate = substr($html, $start, $end === false ? null : $end - $start);
+
+    preg_match_all(
+        '/<div class="wr-row">\s*(?:<a[^>]*class="wr-row__name">|<span>)([^<]*)</',
+        $plate,
+        $matches,
+    );
+
+    return $matches[1];
+}
+
 test('the loved list shows visible talks, newest first', function () {
     talkSource();
     talkSource([
@@ -35,6 +61,35 @@ test('the loved list shows visible talks, newest first', function () {
         ->assertSee('rich hickey')
         ->assertSee('https://example.test/boundaries')
         ->assertSeeInOrder(['boundaries', 'simple made easy']);
+});
+
+test('the loved list is capped at three talks', function () {
+    collect(range(1, 8))->each(fn (int $i) => talkSource([
+        'title' => "Talk Number {$i}",
+        'vault_path' => "clever/bib/talk-{$i}",
+    ]));
+
+    $shown = lovedTitles($this->get('/')->assertOk()->getContent());
+
+    expect($shown)->toHaveCount(3);
+});
+
+test('the three talks are reshuffled on every load', function () {
+    collect(range(1, 8))->each(fn (int $i) => talkSource([
+        'title' => "Talk Number {$i}",
+        // A shared date so nothing but the shuffle decides who shows up.
+        'date_published' => '2015-01-01',
+        'vault_path' => "clever/bib/talk-{$i}",
+    ]));
+
+    // 8 choose 3 is 56 combinations; ten identical draws would mean the
+    // shuffle isn't happening at all.
+    $draws = collect(range(1, 10))
+        ->map(fn () => lovedTitles($this->get('/')->getContent()))
+        ->map(fn (array $titles) => implode('|', $titles))
+        ->unique();
+
+    expect($draws->count())->toBeGreaterThan(1);
 });
 
 test('the loved list hides sources that are not visible talks', function () {

@@ -57,15 +57,14 @@ class ResearchSource extends Model
 
     /**
      * The talks worth pointing at from the public site: type `talk`, visible.
+     * Unordered on purpose — callers decide (the home page shuffles).
      *
      * @param  Builder<$this>  $query
      */
     public function scopeLovedTalks(Builder $query): void
     {
         $query->where('type', self::TYPE_TALK)
-            ->where('is_visible', true)
-            ->orderByRaw('coalesce(date_published, ?) desc', ['0000-00-00'])
-            ->orderBy('title');
+            ->where('is_visible', true);
     }
 
     /**
