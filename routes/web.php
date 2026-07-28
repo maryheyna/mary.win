@@ -10,10 +10,17 @@ use App\Livewire\Settings\Profile;
 use App\Models\ArticleVocabulary;
 use App\Models\RepositoryArticle;
 use App\Models\RepositoryToRead;
+use App\Models\ResearchSource;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('home');
+    // TALKS — LOVED comes from the research library shared with clever/landing.
+    $talksLoved = ResearchSource::query()
+        ->lovedTalks()
+        ->with('people')
+        ->get();
+
+    return view('home', compact('talksLoved'));
 })->name('home');
 
 // The OMT symbols reference that previously lived at '/'.
@@ -126,4 +133,4 @@ Route::prefix('kite')->name('kite.')->group(function () {
     });
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

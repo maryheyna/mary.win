@@ -836,6 +836,9 @@ button {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
+    /* Plates size to their own contents; a short list next to a long one
+       shouldn't stretch into an empty box. */
+    align-items: start;
 }
 
 .wr-grid-3 {

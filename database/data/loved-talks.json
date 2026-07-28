@@ -1,0 +1,439 @@
+{
+    "people": [
+        {
+            "slug": "adam-wathan",
+            "name": "Adam Wathan",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "anthony-ferrara",
+            "name": "Anthony Ferrara",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "caleb-porzio",
+            "name": "Caleb Porzio",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "freek-van-der-herten",
+            "name": "Freek Van Der Herten",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "gary-bernhardt",
+            "name": "Gary Bernhardt",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "guy-steele",
+            "name": "Guy Steele",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "hadi-hariri",
+            "name": "Hadi Hariri",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "jason-lengstorf",
+            "name": "Jason Lengstorf",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "jason-mccreary",
+            "name": "Jason McCreary",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "jb-rainsberger",
+            "name": "J.B. Rainsberger",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "joe-armstrong",
+            "name": "Joe Armstrong",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "kevlin-henney",
+            "name": "Kevlin Henney",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "matt-stauffer",
+            "name": "Matt Stauffer",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "matthias-noback",
+            "name": "Matthias Noback",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "michael-feathers",
+            "name": "Michael Feathers",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "peter-van-hardenberg",
+            "name": "Peter van Hardenberg",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "rich-hickey",
+            "name": "Rich Hickey",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "sandi-metz",
+            "name": "Sandi Metz",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "shawn-mccool",
+            "name": "Shawn McCool",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "simon-brown",
+            "name": "Simon Brown",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "taylor-otwell",
+            "name": "Taylor Otwell",
+            "kind": "person",
+            "url": null
+        },
+        {
+            "slug": "venkat-subramaniam",
+            "name": "Venkat Subramaniam",
+            "kind": "person",
+            "url": null
+        }
+    ],
+    "sources": [
+        {
+            "slug": "matthias-noback-advanced-web-application-architecture",
+            "title": "Advanced Web Application Architecture",
+            "type": "talk",
+            "url": "https://youtu.be/UA-wYxOZUBY",
+            "date_published": "2019",
+            "artifact_status": "unknown",
+            "summary": "Full Stack Europe 2019 talk version of Noback's advanced web application architecture material.",
+            "authors": [
+                "matthias-noback"
+            ]
+        },
+        {
+            "slug": "gary-bernhardt-boundaries",
+            "title": "Boundaries",
+            "type": "talk",
+            "url": "https://www.destroyallsoftware.com/talks/boundaries",
+            "date_published": "2012",
+            "artifact_status": "unknown",
+            "summary": "RubyConf 2012 talk on functional core / imperative shell boundaries.",
+            "authors": [
+                "gary-bernhardt"
+            ]
+        },
+        {
+            "slug": "matthias-noback-brutal-refactoring",
+            "title": "Brutal refactoring, lying code, the Churn…",
+            "type": "talk",
+            "url": "https://youtu.be/E0Mf1qNFb1M",
+            "date_published": "2019",
+            "artifact_status": "unknown",
+            "summary": "NewCrafts 2019 talk on brutal refactoring, lying code, and churn.",
+            "authors": [
+                "matthias-noback"
+            ]
+        },
+        {
+            "slug": "adam-wathan-cruddy-by-design",
+            "title": "Cruddy By Design",
+            "type": "talk",
+            "url": "https://www.youtube.com/watch?v=MF0jFKvS4SI",
+            "date_published": "2017",
+            "artifact_status": "unknown",
+            "summary": "Laracon US 2017 talk arguing for resource-oriented controller design.",
+            "authors": [
+                "adam-wathan"
+            ]
+        },
+        {
+            "slug": "anthony-ferrara-dont-be-stupid-grasp-solid",
+            "title": "Don't Be STUPID, Grasp SOLID",
+            "type": "talk",
+            "url": "https://youtu.be/G32acYVd9LY",
+            "date_published": "2013",
+            "artifact_status": "unknown",
+            "summary": "DrupalCon Prague 2013 talk contrasting STUPID and SOLID code.",
+            "authors": [
+                "anthony-ferrara"
+            ]
+        },
+        {
+            "slug": "venkat-subramaniam-dont-walk-away-from-complexity",
+            "title": "Don't Walk Away from Complexity, Run",
+            "type": "talk",
+            "url": "https://www.youtube.com/watch?v=XlrlgsZS-iI",
+            "date_published": null,
+            "artifact_status": "unknown",
+            "summary": "Devoxx talk on managing software complexity.",
+            "authors": [
+                "venkat-subramaniam"
+            ]
+        },
+        {
+            "slug": "caleb-porzio-embrace-the-backend",
+            "title": "Embrace the Backend (The Talk That Became Livewire)",
+            "type": "talk",
+            "url": "https://youtu.be/uQO4Xh1gMpY",
+            "date_published": "2018",
+            "artifact_status": "unknown",
+            "summary": "Laracon US 2018 talk that became the genesis of Livewire.",
+            "authors": [
+                "caleb-porzio"
+            ]
+        },
+        {
+            "slug": "freek-van-der-herten-enjoying-laravel-data",
+            "title": "Enjoying Laravel Data",
+            "type": "talk",
+            "url": "https://www.youtube.com/watch?v=CrO_7Df1cBc",
+            "date_published": "2023",
+            "artifact_status": "unknown",
+            "summary": "Laracon 2023 talk on Spatie's laravel-data package.",
+            "authors": [
+                "freek-van-der-herten"
+            ]
+        },
+        {
+            "slug": "matt-stauffer-enterprise-laravel",
+            "title": "Enterprise Laravel",
+            "type": "talk",
+            "url": "https://www.youtube.com/watch?v=KBigS5vLwZk",
+            "date_published": "2023",
+            "artifact_status": "unknown",
+            "summary": "Laracon 2023 talk on Laravel at enterprise scale.",
+            "authors": [
+                "matt-stauffer"
+            ]
+        },
+        {
+            "slug": "taylor-otwell-fat-model-skinny-controller",
+            "title": "Fat model, skinny controller (Laracasts)",
+            "type": "talk",
+            "url": "https://laracasts.com/series/laravel-from-scratch-2018/episodes/12",
+            "date_published": null,
+            "artifact_status": "unknown",
+            "summary": "Taylor Otwell's 'fat model, skinny controller' guidance, from the Laracasts Laravel From Scratch 2018 series.",
+            "authors": [
+                "taylor-otwell"
+            ]
+        },
+        {
+            "slug": "guy-steele-growing-a-language",
+            "title": "Growing A Language",
+            "type": "talk",
+            "url": "https://www.youtube.com/watch?v=_ahvzDzKdB0",
+            "date_published": "1998",
+            "artifact_status": "unknown",
+            "summary": "OOPSLA 1998 talk on language and API design.",
+            "authors": [
+                "guy-steele"
+            ]
+        },
+        {
+            "slug": "matthias-noback-hexagonal-architecture",
+            "title": "Hexagonal Architecture",
+            "type": "talk",
+            "url": "https://youtu.be/fIdzrwIaoEE",
+            "date_published": null,
+            "artifact_status": "unknown",
+            "summary": "Talk on hexagonal (ports and adapters) architecture.",
+            "authors": [
+                "matthias-noback"
+            ]
+        },
+        {
+            "slug": "jason-lengstorf-api-first-ecosystem",
+            "title": "How the API-First Ecosystem Made Us All Full-Stack",
+            "type": "talk",
+            "url": "https://www.youtube.com/watch?v=ln_GTGIxqRE",
+            "date_published": "2022",
+            "artifact_status": "unknown",
+            "summary": "RenderATL 2022 talk on the API-first ecosystem.",
+            "authors": [
+                "jason-lengstorf"
+            ]
+        },
+        {
+            "slug": "jb-rainsberger-integration-tests-are-a-scam",
+            "title": "Integration Tests Are A Scam",
+            "type": "talk",
+            "url": null,
+            "date_published": null,
+            "artifact_status": "unknown",
+            "summary": "Talk arguing against over-reliance on integration tests. (author blank in note)",
+            "authors": [
+                "jb-rainsberger"
+            ]
+        },
+        {
+            "slug": "shawn-mccool-use-case-architecture",
+            "title": "Laravel.IO, A Use-Case Architecture",
+            "type": "talk",
+            "url": "https://youtu.be/2_380DKU93U",
+            "date_published": "2014",
+            "artifact_status": "unknown",
+            "summary": "Laracon NYC 2014 talk on a use-case-driven architecture behind Laravel.IO.",
+            "authors": [
+                "shawn-mccool"
+            ]
+        },
+        {
+            "slug": "kevlin-henney-hadi-hariri-managing-complexity",
+            "title": "Managing Complexity in Software",
+            "type": "talk",
+            "url": "https://www.youtube.com/watch?v=4AyDmlXcwNU",
+            "date_published": null,
+            "artifact_status": "unknown",
+            "summary": "GOTO Unscripted conversation on managing complexity in software.",
+            "authors": [
+                "kevlin-henney",
+                "hadi-hariri"
+            ]
+        },
+        {
+            "slug": "simon-brown-modular-monoliths",
+            "title": "Modular Monoliths",
+            "type": "talk",
+            "url": "https://www.youtube.com/watch?v=5OjqD-ow8GE",
+            "date_published": null,
+            "artifact_status": "unknown",
+            "summary": "Modular Monoliths (talk)",
+            "authors": [
+                "simon-brown"
+            ]
+        },
+        {
+            "slug": "sandi-metz-nothing-is-something",
+            "title": "Nothing is Something",
+            "type": "talk",
+            "url": null,
+            "date_published": "2015",
+            "artifact_status": "unknown",
+            "summary": "RailsConf 2015 talk on object design and null objects. (named; no capture)",
+            "authors": [
+                "sandi-metz"
+            ]
+        },
+        {
+            "slug": "matthias-noback-please-understand-me",
+            "title": "Please Understand Me",
+            "type": "talk",
+            "url": "https://youtu.be/2A1CykoizgY",
+            "date_published": "2016",
+            "artifact_status": "unknown",
+            "summary": "Laracon EU 2016 talk.",
+            "authors": [
+                "matthias-noback"
+            ]
+        },
+        {
+            "slug": "adam-wathan-resisting-complexity",
+            "title": "Resisting Complexity",
+            "type": "talk",
+            "url": "https://www.youtube.com/watch?v=dfgtKb-VpRk",
+            "date_published": "2018",
+            "artifact_status": "unknown",
+            "summary": "Laracon US 2018 talk on resisting unnecessary complexity.",
+            "authors": [
+                "adam-wathan"
+            ]
+        },
+        {
+            "slug": "rich-hickey-simple-made-easy",
+            "title": "Simple Made Easy",
+            "type": "talk",
+            "url": "https://www.infoq.com/presentations/Simple-Made-Easy/",
+            "date_published": "2011",
+            "artifact_status": "unknown",
+            "summary": "StrangeLoop 2011 keynote distinguishing simple from easy. Transcript at https://github.com/matthiasn/talk-transcripts/blob/master/Hickey_Rich/SimpleMadeEasy-mostly-text.md",
+            "authors": [
+                "rich-hickey"
+            ]
+        },
+        {
+            "slug": "michael-feathers-deep-synergy-testability-design",
+            "title": "The Deep Synergy Between Testability and Good Design",
+            "type": "talk",
+            "url": "https://rackandstack-tech.blog/2019/10/22/the-deep-synergy-between-testability-and-good-design-michael-feathers/",
+            "date_published": "~2011",
+            "artifact_status": "unknown",
+            "summary": "Talk (~2011) on the link between testability and good design; URL is a mirror. (named; no capture)",
+            "authors": [
+                "michael-feathers"
+            ]
+        },
+        {
+            "slug": "joe-armstrong-the-mess-were-in",
+            "title": "The Mess We're In",
+            "type": "talk",
+            "url": "https://www.youtube.com/watch?v=lKXe3HUG2l4",
+            "date_published": "2014",
+            "artifact_status": "unknown",
+            "summary": "StrangeLoop 2014 talk on the complexity crisis in software.",
+            "authors": [
+                "joe-armstrong"
+            ]
+        },
+        {
+            "slug": "peter-van-hardenberg-why-cant-we-make-simple-software",
+            "title": "Why Can't We Make Simple Software?",
+            "type": "talk",
+            "url": null,
+            "date_published": "2025",
+            "artifact_status": "unknown",
+            "summary": "Handmade Cities 2025 talk on the difficulty of building simple software.",
+            "authors": [
+                "peter-van-hardenberg"
+            ]
+        },
+        {
+            "slug": "jason-mccreary-yagni",
+            "title": "YAGNI",
+            "type": "talk",
+            "url": "https://www.youtube.com/watch?v=rpE3Z62FHaY",
+            "date_published": "2016",
+            "artifact_status": "unknown",
+            "summary": "Laracon 2016 talk on the You Aren't Gonna Need It principle.",
+            "authors": [
+                "jason-mccreary"
+            ]
+        }
+    ]
+}

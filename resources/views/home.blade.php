@@ -5,11 +5,7 @@
         ['title' => 'off-by-one: tiny word games', 'when' => 'lightning ’26'],
     ];
 
-    $talksLoved = [
-        ['title' => 'simple made easy', 'who' => 'hickey'],
-        ['title' => 'inventing on principle', 'who' => 'victor'],
-        ['title' => 'wat', 'who' => 'bernhardt'],
-    ];
+    // $talksLoved arrives from the route: type=talk rows in the research library.
 
     $games = [
         [
@@ -123,9 +119,13 @@
                         <div class="wr-plate__body">
                             @foreach ($talksLoved as $talk)
                                 <div class="wr-row">
-                                    <span>{{ $talk['title'] }}</span>
+                                    @if ($talk->url)
+                                        <a href="{{ $talk->url }}" class="wr-row__name">{{ Str::lower($talk->title) }}</a>
+                                    @else
+                                        <span>{{ Str::lower($talk->title) }}</span>
+                                    @endif
                                     <span class="wr-leader" aria-hidden="true"></span>
-                                    <span class="wr-row__status">{{ $talk['who'] }}</span>
+                                    <span class="wr-row__status">{{ Str::lower($talk->author ?? '') }}</span>
                                 </div>
                             @endforeach
                         </div>
