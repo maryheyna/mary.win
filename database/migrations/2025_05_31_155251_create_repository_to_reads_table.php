@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('forks_count')->default(0);
             $table->string('language')->nullable();
             $table->timestamps();
-            
+
             // Ensure user can't add the same repository twice
             $table->unique(['user_id', 'github_id']);
         });

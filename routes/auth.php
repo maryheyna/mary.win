@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\GitHubAuthController;
+use App\Livewire\Actions\Logout;
 use App\Livewire\Auth\ConfirmPassword;
 use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\Login;
@@ -40,5 +41,5 @@ Route::middleware('auth')->group(function () {
     Route::get('auth/github/reauth', [GitHubAuthController::class, 'reauth'])->name('github.reauth');
 });
 
-Route::post('logout', App\Livewire\Actions\Logout::class)
+Route::post('logout', Logout::class)
     ->name('logout');

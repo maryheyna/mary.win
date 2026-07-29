@@ -48,7 +48,7 @@ class Term extends Model
 
         $term = static::where($searchAttributes)->first();
 
-        if (!$term) {
+        if (! $term) {
             $term = static::create($attributes);
         } else {
             // Update existing term with new information if provided
@@ -58,7 +58,7 @@ class Term extends Model
                 'uses_callback' => $attributes['uses_callback'] ?? $term->uses_callback,
             ]);
 
-            if (!empty($updateData)) {
+            if (! empty($updateData)) {
                 $term->update($updateData);
             }
         }

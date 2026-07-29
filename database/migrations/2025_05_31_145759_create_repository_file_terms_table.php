@@ -23,7 +23,7 @@ return new class extends Migration
             $table->index(['repository_file_id', 'term_id']);
             $table->index(['user_id', 'term_id']);
             $table->index('frequency');
-            
+
             // Ensure unique combinations per file per term per user
             $table->unique(['repository_file_id', 'term_id', 'user_id'], 'file_term_user_unique');
         });

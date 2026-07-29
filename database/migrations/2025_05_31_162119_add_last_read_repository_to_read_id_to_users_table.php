@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('last_read_repository_to_read_id')
-                  ->nullable()
-                  ->after('github_refresh_token')
-                  ->constrained('repository_to_reads')
-                  ->onDelete('set null');
+                ->nullable()
+                ->after('github_refresh_token')
+                ->constrained('repository_to_reads')
+                ->onDelete('set null');
         });
     }
 

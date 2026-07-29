@@ -35,6 +35,13 @@ return [
         ],
     ],
 
+    // Mailing-list ingest. The other sites (clever, …) POST signups to
+    // /api/subscribers and authenticate with this shared token. Blank closes
+    // the endpoint rather than opening it.
+    'newsletter' => [
+        'ingest_token' => env('NEWSLETTER_INGEST_TOKEN'),
+    ],
+
     // GitHub OAuth (Socialite). Grants `repo` scope for private-repo reading, so the
     // access/refresh tokens are stored encrypted on the User model (see the `encrypted` casts).
     'github' => [

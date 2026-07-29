@@ -19,10 +19,10 @@ return new class extends Migration
             $table->foreignId('term_id')->constrained()->onDelete('cascade');
             $table->integer('frequency')->default(1);
             $table->timestamps();
-            
+
             // Ensure unique combination - no duplicate terms per file per user
             $table->unique(['user_id', 'repository_to_read_id', 'repository_article_id', 'term_id'], 'article_vocab_unique');
-            
+
             // Indexes for efficient queries
             $table->index(['user_id', 'repository_to_read_id']);
             $table->index(['term_id']);

@@ -57,7 +57,7 @@ class Repository extends Model
      */
     public function isAnalyzed(): bool
     {
-        return !empty($this->last_analyzed_commit_sha) && !empty($this->file_structure);
+        return ! empty($this->last_analyzed_commit_sha) && ! empty($this->file_structure);
     }
 
     /**
@@ -79,7 +79,7 @@ class Repository extends Model
 
         // Fallback to JSON structure if files not stored yet
         $structure = $this->file_structure;
-        
+
         return array_filter($structure, function ($file) use ($category) {
             return ($file['category'] ?? 'other') === $category;
         });
@@ -114,7 +114,7 @@ class Repository extends Model
      */
     public function getAnalysisCompletionAttribute(): int
     {
-        if (!$this->isAnalyzed()) {
+        if (! $this->isAnalyzed()) {
             return 0;
         }
 

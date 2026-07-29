@@ -41,7 +41,7 @@ class FourLetterWords extends Component
             return ['ok' => false, 'ignored' => true];
         }
 
-        $result = (new Rules())->submit(
+        $result = (new Rules)->submit(
             Chain::fromWords(...array_map(Word::of(...), $this->played)),
             $candidate,
             WordList::dictionary(),

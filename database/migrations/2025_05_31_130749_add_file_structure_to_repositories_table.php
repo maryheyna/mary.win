@@ -31,7 +31,7 @@ return new class extends Migration
                 'file_structure',
                 'file_structure_updated_at',
                 'total_files_count',
-                'relevant_files_count'
+                'relevant_files_count',
             ]);
         });
     }

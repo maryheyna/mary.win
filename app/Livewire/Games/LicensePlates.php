@@ -79,7 +79,7 @@ class LicensePlates extends Component
     /** Begin a round. The seed parameter exists for tests; players let the shell draw it. */
     public function newPlate(?int $seed = null): array
     {
-        $result = (new Rules())->startRound(
+        $result = (new Rules)->startRound(
             $this->settings(),
             $seed ?? random_int(1, 0x7FFFFFFF),
             $this->nowMs(),
@@ -116,7 +116,7 @@ class LicensePlates extends Component
             return ['ok' => false, 'reason' => 'no_round'];
         }
 
-        $result = (new Rules())->submit($round, $word, $this->settings(), WordList::dictionary(), $this->nowMs());
+        $result = (new Rules)->submit($round, $word, $this->settings(), WordList::dictionary(), $this->nowMs());
 
         if ($result->accepted) {
             $this->played = $result->round->played;

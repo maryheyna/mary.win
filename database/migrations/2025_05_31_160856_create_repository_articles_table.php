@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('size')->nullable();
             $table->string('sha')->nullable();
             $table->timestamps();
-            
+
             // Index for efficient queries
             $table->index(['user_id', 'repository_to_read_id']);
             $table->index(['category']);
