@@ -38,7 +38,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
@@ -48,10 +48,10 @@ class UserFactory extends Factory
      */
     public function withGithub(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'github_id' => (string) fake()->unique()->numberBetween(1000, 9_999_999),
-            'github_token' => 'gho_'.Str::random(36),
-            'github_refresh_token' => 'ghr_'.Str::random(36),
+            'github_token' => 'gho_' . Str::random(36),
+            'github_refresh_token' => 'ghr_' . Str::random(36),
         ]);
     }
 }
