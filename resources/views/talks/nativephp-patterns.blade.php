@@ -24,14 +24,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>One Frame, Nine Patterns — NativePHP v4’s render cycle</title>
+    <title>Design Patterns in NativePHP — v4’s render cycle</title>
     <meta name="description"
         content="A 10-minute talk on NativePHP v4’s SuperNative render cycle, told as one button press across a language border — with every claim checked against the docs." />
 
     <link rel="canonical" href="{{ route('talks.nativephp-patterns') }}" />
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="mary.win" />
-    <meta property="og:title" content="One Frame, Nine Patterns — NativePHP v4’s render cycle" />
+    <meta property="og:title" content="Design Patterns in NativePHP — v4’s render cycle" />
     <meta property="og:description"
         content="A 10-minute talk on NativePHP v4’s SuperNative render cycle, told as one button press across a language border — with every claim checked against the docs." />
     <meta property="og:url" content="{{ route('talks.nativephp-patterns') }}" />
@@ -163,7 +163,11 @@
         }
 
         .np-src {
-            white-space: nowrap;
+            min-width: 170px;
+        }
+
+        .np-src a {
+            display: block;
         }
 
         /* below ~640px the table folds into stacked cards; nothing overflows */
@@ -206,7 +210,7 @@
             }
 
             .np-src {
-                white-space: normal;
+                min-width: 0;
             }
         }
 
@@ -263,7 +267,7 @@
                 <div class="wr-hero__aurora" aria-hidden="true"></div>
                 <div class="wr-wrap wr-hero__inner">
                     <p class="wr-entry"><span class="wr-dot" aria-hidden="true"></span>TALK</p>
-                    <h1 class="wr-display wr-hero__title">One Frame,<br><span class="wr-grad">Nine Patterns</span></h1>
+                    <h1 class="wr-display wr-hero__title">Design Patterns<br><span class="wr-grad">in NativePHP</span></h1>
                     <p class="wr-hero__lede">Design patterns under pressure in the NativePHP v4 render cycle</p>
                     <p class="wr-meta np-talkmeta">10-minute talk · for Laravel
                         developers{{ $eventDate ? ' · '.$eventDate : '' }}</p>
@@ -335,7 +339,7 @@
                                         inside the app process; it talks to native over shared memory, not sockets.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s4">S4</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/embedded-php" rel="noopener">Embedded PHP</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"PHP ships inside your
                                         app as a library"; "there's no FastCGI, no sockets, no per-request process to
                                         spawn"; "shared memory only works when both sides share a process."</td>
@@ -345,7 +349,7 @@
                                         extension — native code compiled into libphp itself.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s4">S4</a>, <a href="#s6">S6</a>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/embedded-php" rel="noopener">Embedded PHP</a> <a href="https://nativephp.com/docs/mobile/4/architecture/glossary" rel="noopener">Glossary</a>
                                     </td>
                                     <td class="np-quote" data-label="Exact line from the docs">"The Element Runtime is
                                         a PHP extension — native code compiled into libphp itself, alongside the
@@ -356,7 +360,7 @@
                                         pinned to each release.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s4">S4</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/embedded-php" rel="noopener">Embedded PHP</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"every release of
                                         nativephp/mobile pins exact binary builds… produced and shipped together, from
                                         matching sources."</td>
@@ -366,7 +370,7 @@
                                         Render, Publish, Mount.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s1">S1</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/render-publish-mount" rel="noopener">Render, Publish, and Mount</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">Doc page titled "Render,
                                         Publish, and Mount," describing all three stages.</td>
                                 </tr>
@@ -375,7 +379,7 @@
                                         Tree.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s1">S1</a>, <a href="#s6">S6</a>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/render-publish-mount" rel="noopener">Render, Publish, and Mount</a> <a href="https://nativephp.com/docs/mobile/4/architecture/glossary" rel="noopener">Glossary</a>
                                     </td>
                                     <td class="np-quote" data-label="Exact line from the docs">"PHP builds an Element
                                         Tree describing what the screen should look like."</td>
@@ -385,7 +389,7 @@
                                         emits an Element — a plain PHP object.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s1">S1</a>, <a href="#s6">S6</a>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/render-publish-mount" rel="noopener">Render, Publish, and Mount</a> <a href="https://nativephp.com/docs/mobile/4/architecture/glossary" rel="noopener">Glossary</a>
                                     </td>
                                     <td class="np-quote" data-label="Exact line from the docs">"Blade compiles the
                                         template, and each <code>native:</code> tag emits an Element: a plain PHP
@@ -397,7 +401,7 @@
                                         values in PHP, not on the native side.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s1">S1</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/render-publish-mount" rel="noopener">Render, Publish, and Mount</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"Utility classes like
                                         <code>p-4</code> and <code>text-2xl</code> are parsed into concrete layout and
                                         style values at this stage."</td>
@@ -407,7 +411,7 @@
                                         flatten; only primitives reach the published tree.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s1">S1</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/render-publish-mount" rel="noopener">Render, Publish, and Mount</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"Higher-level EDGE
                                         components you compose yourself flatten into these primitives; only primitive
                                         elements appear in the tree."</td>
@@ -417,7 +421,7 @@
                                         is registered and replaced with a stable callback ID.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s1">S1</a>, <a href="#s6">S6</a>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/render-publish-mount" rel="noopener">Render, Publish, and Mount</a> <a href="https://nativephp.com/docs/mobile/4/architecture/glossary" rel="noopener">Glossary</a>
                                     </td>
                                     <td class="np-quote" data-label="Exact line from the docs">"event handlers like
                                         <code>@@press="refresh"</code> are registered and replaced with stable callback
@@ -430,7 +434,7 @@
                                         (type, layout, style, refs to props and handlers).</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s1">S1</a>, <a href="#s6">S6</a>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/render-publish-mount" rel="noopener">Render, Publish, and Mount</a> <a href="https://nativephp.com/docs/mobile/4/architecture/glossary" rel="noopener">Glossary</a>
                                     </td>
                                     <td class="np-quote" data-label="Exact line from the docs">"writes each element
                                         into shared memory as a node: a compact, fixed-layout binary record carrying
@@ -442,7 +446,7 @@
                                         first paint and for every update after.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s1">S1</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/render-publish-mount" rel="noopener">Render, Publish, and Mount</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"The same pipeline runs
                                         for the first paint of a screen and for every update after it."</td>
                                 </tr>
@@ -451,7 +455,7 @@
                                         reuse markers instead of being re-encoded.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s2">S2</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/subtree-reuse" rel="noopener">Subtree Reuse</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"any subtree whose
                                         fingerprint matches the previous frame is written as a single tiny reuse marker
                                         instead of being re-encoded."</td>
@@ -461,7 +465,7 @@
                                         published at all.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s2">S2</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/subtree-reuse" rel="noopener">Subtree Reuse</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"Identical frames are
                                         dropped on the spot — the native side is never even woken."</td>
                                 </tr>
@@ -470,7 +474,7 @@
                                         spliced from the previous tree without decoding.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s2">S2</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/subtree-reuse" rel="noopener">Subtree Reuse</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"The native reader
                                         splices the corresponding subtree from the tree it already has, without
                                         decoding anything."</td>
@@ -480,7 +484,7 @@
                                         thread decodes frames and diffs against the previous tree.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s1">S1</a>, <a href="#s3">S3</a>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/render-publish-mount" rel="noopener">Render, Publish, and Mount</a> <a href="https://nativephp.com/docs/mobile/4/architecture/threading-model" rel="noopener">Threading Model</a>
                                     </td>
                                     <td class="np-quote" data-label="Exact line from the docs">"Each platform has a
                                         background thread that receives published frames, decodes them, and diffs them
@@ -491,7 +495,7 @@
                                         counters; it runs on the PHP thread, off the UI thread.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s3">S3</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/threading-model" rel="noopener">Threading Model</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"atomic version counters
                                         on the shared region"; "the PHP thread wakes, runs your handler, re-renders and
                                         publishes."</td>
@@ -502,8 +506,8 @@
                                         thread diffs → UI thread mounts.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s1">S1</a>, <a href="#s3">S3</a>,
-                                        <a href="#s6">S6</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/render-publish-mount" rel="noopener">Render, Publish, and Mount</a> <a href="https://nativephp.com/docs/mobile/4/architecture/threading-model" rel="noopener">Threading Model</a>
+                                        <a href="https://nativephp.com/docs/mobile/4/architecture/glossary" rel="noopener">Glossary</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"fires a press event
                                         carrying its callback ID into the event channel"; "the PHP thread wakes, runs
                                         your handler, re-renders and publishes → the reader thread diffs → the UI
@@ -515,8 +519,8 @@
                                         discrete event, not a per-frame consult.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s3">S3</a>, <a href="#s8">S8</a>,
-                                        <a href="#s6">S6</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/threading-model" rel="noopener">Threading Model</a> <a href="https://nativephp.com/docs/mobile/4/architecture/about-the-new-architecture" rel="noopener">About the New Architecture</a>
+                                        <a href="https://nativephp.com/docs/mobile/4/architecture/glossary" rel="noopener">Glossary</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"Gestures and animations
                                         driven by SharedValues are evaluated directly on the UI thread at the display's
                                         frame rate… PHP receives one event when the gesture completes."</td>
@@ -526,7 +530,7 @@
                                         side; PHP holds a handle to it.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s6">S6</a>, <a href="#s8">S8</a>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/glossary" rel="noopener">Glossary</a> <a href="https://nativephp.com/docs/mobile/4/architecture/about-the-new-architecture" rel="noopener">About the New Architecture</a>
                                     </td>
                                     <td class="np-quote" data-label="Exact line from the docs">SharedValue: "A value
                                         that lives on the native side… PHP holds a handle."</td>
@@ -536,7 +540,7 @@
                                         native implementations; flexbox values drive a per-platform Layout.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s5">S5</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/cross-platform-implementation" rel="noopener">Cross-Platform Implementation</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"each platform
                                         implements flexbox inside its own layout system — a pure-Swift Layout on iOS
                                         and a Compose Layout on Android."</td>
@@ -546,8 +550,8 @@
                                         and Jetpack Compose on Android.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s1">S1</a>, <a href="#s5">S5</a>,
-                                        <a href="#s7">S7</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/render-publish-mount" rel="noopener">Render, Publish, and Mount</a> <a href="https://nativephp.com/docs/mobile/4/architecture/cross-platform-implementation" rel="noopener">Cross-Platform Implementation</a>
+                                        <a href="https://nativephp.com/docs/mobile/4/architecture/super-native" rel="noopener">SuperNative Introduction (docs)</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"a renderer that maps
                                         each node type to a SwiftUI view or a composable."</td>
                                 </tr>
@@ -556,7 +560,7 @@
                                         architecture in v4; the web view is opt-in per screen.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s9">S9</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/blog/supernative" rel="noopener">Blog: SuperNative</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"SuperNative is the
                                         default architecture"; web view is "explicitly opt-in" via
                                         <code>&lt;native:webview&gt;</code>.</td>
@@ -566,7 +570,7 @@
                                         no serialization step and no web-view bridge.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s7">S7</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/super-native" rel="noopener">SuperNative Introduction (docs)</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"no network round-trip,
                                         no serialization overhead, and no waiting on a web view bridge."</td>
                                 </tr>
@@ -575,7 +579,7 @@
                                         beta reference app, not for production.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--doc">Documented</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s10">S10</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://github.com/NativePHP/super-native" rel="noopener">Reference app (super-native)</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">"Not for production.
                                         This is a reference app for exploring NativePHP's Element rendering system."
                                     </td>
@@ -597,7 +601,7 @@
                                         presented as the Gang-of-Four Bridge pattern.</td>
                                     <td class="np-type" data-label="Type"><span
                                             class="np-tag np-tag--interp">Interpretation</span></td>
-                                    <td class="np-src" data-label="Source"><a href="#s5">S5</a></td>
+                                    <td class="np-src" data-label="Source"><a href="https://nativephp.com/docs/mobile/4/architecture/cross-platform-implementation" rel="noopener">Cross-Platform Implementation</a></td>
                                     <td class="np-quote" data-label="Exact line from the docs">Mechanism is documented
                                         (see the per-platform Layout row); calling it "Bridge" is the speaker's
                                         reading.</td>

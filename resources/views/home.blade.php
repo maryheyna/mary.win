@@ -1,9 +1,11 @@
 @php
     $talksGiven = [
-        ['title' => 'database-first thinking', 'when' => 'meetup ’25'],
-        ['title' => 'a spreadsheet is an api if you’re brave', 'when' => 'meetup ’25'],
-        ['title' => 'off-by-one: tiny word games', 'when' => 'lightning ’26'],
-        ['title' => 'one frame, nine patterns', 'when' => 'summary + sources', 'url' => route('talks.nativephp-patterns')],
+        ['title' => 'design patterns in laravel', 'when' => 'laracon us ’25', 'url' => 'https://www.youtube.com/watch?v=w7jKcbVcI54'],
+        ['title' => 'auth factories in laravel', 'when' => 'laracon au ’25', 'url' => 'https://www.youtube.com/watch?v=KroiagwnV0s'],
+        ['title' => 'who watches the watchers?', 'when' => 'bsidesnepa ’25'],
+        ['title' => 'the observer pattern', 'when' => 'wire:live ’25', 'url' => 'https://www.youtube.com/watch?v=Rc4Q1D0uWAg'],
+        ['title' => 'cleverness is a loan', 'when' => 'laracon us ’26', 'url' => 'https://clever.mary.win'],
+        ['title' => 'design patterns in nativephp', 'when' => 'summary + sources', 'url' => route('talks.nativephp-patterns')],
     ];
 
     // $talksLoved arrives from the route: type=talk rows in the research library.
@@ -120,7 +122,7 @@
                         </div>
                     </div>
                     <div class="wr-plate">
-                        <div class="wr-plate__head"><span class="wr-label">LOVED — SEE ALSO</span></div>
+                        <div class="wr-plate__head"><a href="{{ route('talks.loved') }}" class="wr-label">LOVED — SEE ALSO</a></div>
                         <div class="wr-plate__body">
                             @foreach ($talksLoved as $talk)
                                 <div class="wr-row">

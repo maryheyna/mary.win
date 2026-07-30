@@ -31,6 +31,17 @@ Route::get('/', function () {
 // TALKS — GIVEN: a static page per talk, summary + verified citations.
 Route::view('/talks/nativephp-patterns', 'talks.nativephp-patterns')->name('talks.nativephp-patterns');
 
+// TALKS — LOVED: the whole list, not just the three the home page deals out.
+Route::get('/talks/loved', function () {
+    $talksLoved = ResearchSource::query()
+        ->lovedTalks()
+        ->orderByDesc('date_published')
+        ->orderBy('title')
+        ->get();
+
+    return view('talks.loved', compact('talksLoved'));
+})->name('talks.loved');
+
 // The OMT symbols reference that previously lived at '/'.
 Route::get('/omt', function () {
     return view('welcome');

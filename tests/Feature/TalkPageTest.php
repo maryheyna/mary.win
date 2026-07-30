@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ResearchSource;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -7,8 +8,8 @@ uses(RefreshDatabase::class);
 test('the nativephp patterns talk page renders', function () {
     $this->get('/talks/nativephp-patterns')
         ->assertOk()
-        ->assertSee('One Frame,', false)
-        ->assertSee('Nine Patterns')
+        ->assertSee('Design Patterns', false)
+        ->assertSee('in NativePHP')
         ->assertSee('Design patterns under pressure in the NativePHP v4 render cycle')
         ->assertSee('Documented')
         ->assertSee('Interpretation')
@@ -44,6 +45,35 @@ test('no private presenter notes leak onto the public page', function () {
 test('the home page links the talk from the given list', function () {
     $this->get('/')
         ->assertOk()
-        ->assertSee('one frame, nine patterns')
+        ->assertSee('design patterns in nativephp')
         ->assertSee(route('talks.nativephp-patterns'));
+});
+
+test('the loved talks index lists every visible loved talk', function () {
+    ResearchSource::create([
+        'title' => 'Simple Made Easy',
+        'author' => 'Rich Hickey',
+        'type' => ResearchSource::TYPE_TALK,
+        'is_visible' => true,
+        'url' => 'https://example.com/simple-made-easy',
+        'date_published' => '2011-09-19',
+    ]);
+    ResearchSource::create([
+        'title' => 'A Hidden Talk',
+        'type' => ResearchSource::TYPE_TALK,
+        'is_visible' => false,
+    ]);
+
+    $this->get('/talks/loved')
+        ->assertOk()
+        ->assertSee('simple made easy')
+        ->assertSee('rich hickey · ’11')
+        ->assertSee('https://example.com/simple-made-easy')
+        ->assertDontSee('a hidden talk');
+});
+
+test('the home page links the loved talks index from the plate title', function () {
+    $this->get('/')
+        ->assertOk()
+        ->assertSee(route('talks.loved'));
 });
