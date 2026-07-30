@@ -90,7 +90,10 @@
             font-weight: 600;
             border: 1px solid currentColor;
             padding: 2px 7px;
-            white-space: nowrap;
+            line-height: 1.7;
+            /* no nowrap: the long tags ("verified PHP abstraction + …") must
+               be able to wrap inside the chip, or they blow the plate column
+               out past narrow viewports */
         }
 
         .np-tag--doc {
@@ -153,22 +156,29 @@
             display: block;
         }
 
-        /* below ~640px the table folds into stacked cards; nothing overflows */
+        /* below ~640px each row folds into a citation card: claim as title
+           with the type tag top-right, the quote as a ruled excerpt, and the
+           source links as one compact inline row — no repeated field labels */
         @media (max-width: 640px) {
             .np-table thead {
                 display: none;
             }
 
             .np-table,
-            .np-table tbody,
-            .np-table tr,
-            .np-table td {
+            .np-table tbody {
                 display: block;
             }
 
             .np-table tr {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                grid-template-areas:
+                    "claim type"
+                    "quote quote"
+                    "src   src";
+                gap: 10px 12px;
+                padding: 16px;
                 border-bottom: 1px solid var(--hair);
-                padding: 14px 0;
             }
 
             .np-table tbody tr:last-child {
@@ -176,24 +186,39 @@
             }
 
             .np-table td {
+                display: block;
                 border: 0;
-                padding: 5px 16px;
+                padding: 0;
                 min-width: 0;
             }
 
-            .np-table td::before {
-                content: attr(data-label);
-                display: block;
-                font-size: var(--text-label-size);
-                letter-spacing: var(--text-label-tracking);
-                text-transform: uppercase;
-                color: var(--muted);
-                font-weight: 600;
-                margin-bottom: 3px;
+            .np-claim {
+                grid-area: claim;
+                font-size: 13px;
+            }
+
+            .np-type {
+                grid-area: type;
+                align-self: start;
+            }
+
+            .np-table .np-quote {
+                grid-area: quote;
+                border-left: 2px solid var(--hair);
+                padding-left: 12px;
             }
 
             .np-src {
-                min-width: 0;
+                grid-area: src;
+            }
+
+            .np-src a {
+                display: inline;
+            }
+
+            .np-src a + a::before {
+                content: "· ";
+                color: var(--muted);
             }
         }
 
@@ -268,17 +293,48 @@
             overflow-x: auto;
         }
 
-        /* the diagrams keep the slides' own white canvas in both themes */
+        /* zoom/pan affordances — the fit script marks wraps whose diagram is
+           rendering below its legible width (is-zoomable) and, once zoomed,
+           wider than the screen (is-scrollable); the cue sticks to the left
+           edge while you drag */
+        .np-figurewrap.is-zoomable::after,
+        .np-figurewrap.is-scrollable::after {
+            content: 'tap to zoom';
+            display: block;
+            position: sticky;
+            left: 0;
+            width: max-content;
+            padding-top: 7px;
+            font-size: var(--text-label-size);
+            letter-spacing: var(--text-label-tracking);
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--accent-2);
+        }
+
+        .np-figurewrap.is-scrollable::after {
+            content: 'drag to pan · tap to shrink';
+        }
+
+        .np-figurewrap.is-zoomable .np-diagram {
+            cursor: zoom-in;
+        }
+
+        .np-figurewrap.is-scrollable .np-diagram {
+            cursor: zoom-out;
+        }
+
+        /* the diagrams keep the slides' own white canvas in both themes.
+           No width floor: each diagram tracks its container and the fit
+           script scales the stage to match, so it resizes with the viewport.
+           When that leaves the labels too small to read, tapping restores a
+           legible width (820px full / 430px half — the --half class is the
+           script's hook) as an inline min-width, and the wrap pans. */
         .np-diagram {
             position: relative;
-            min-width: 820px;
             background: #ffffff;
             border: 1px solid var(--hair);
             overflow: hidden;
-        }
-
-        .np-diagram--half {
-            min-width: 480px;
         }
 
         .np-diagram__stage {
@@ -302,6 +358,12 @@
             gap: 16px;
         }
 
+        /* grid items don't shrink below their content's min-width by default;
+           without this the half diagrams blow the whole plate column out */
+        .np-figgrid > div {
+            min-width: 0;
+        }
+
         .np-sublabel {
             margin: 0 0 8px;
             font-size: var(--text-label-size);
@@ -314,6 +376,14 @@
         @media (max-width: 900px) {
             .np-figgrid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        /* small phones: the hero tracks the viewport instead of pinning at
+           the system's 56px floor */
+        @media (max-width: 480px) {
+            .wr-hero__title {
+                font-size: clamp(42px, 13.5vw, 56px);
             }
         }
     </style>
@@ -1202,12 +1272,58 @@
         (function () {
             var boxes = document.querySelectorAll('.np-diagram');
 
+            function legibleWidth(box) {
+                return box.classList.contains('np-diagram--half') ? 430 : 820;
+            }
+
             function fit() {
                 boxes.forEach(function (box) {
                     var stage = box.firstElementChild;
                     stage.style.transform = 'scale(' + box.clientWidth / stage.offsetWidth + ')';
+
+                    var wrap = box.closest('.np-figurewrap');
+                    if (!wrap) return;
+                    wrap.classList.toggle('is-scrollable', wrap.scrollWidth - wrap.clientWidth > 1);
+
+                    var zoomable = box.style.minWidth !== '' || box.clientWidth < legibleWidth(box) - 1;
+                    wrap.classList.toggle('is-zoomable', zoomable);
+                    if (zoomable) wrap.setAttribute('tabindex', '0');
+                    else wrap.removeAttribute('tabindex');
                 });
             }
+
+            boxes.forEach(function (box) {
+                var wrap = box.closest('.np-figurewrap');
+                if (!wrap) return;
+
+                var panStart = 0;
+                wrap.addEventListener('pointerdown', function () { panStart = wrap.scrollLeft; });
+
+                function toggle() {
+                    if (!wrap.classList.contains('is-zoomable')) return;
+                    if (box.style.minWidth) {
+                        box.style.minWidth = '';
+                        wrap.scrollLeft = 0;
+                    } else {
+                        box.style.minWidth = legibleWidth(box) + 'px';
+                    }
+                    fit();
+                }
+
+                wrap.addEventListener('click', function () {
+                    // a drag that ends on the diagram fires a click too — only
+                    // treat it as a tap if the wrap didn't pan in between
+                    if (Math.abs(wrap.scrollLeft - panStart) > 8) return;
+                    toggle();
+                });
+
+                wrap.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggle();
+                    }
+                });
+            });
 
             window.addEventListener('resize', fit);
             fit();
