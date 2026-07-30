@@ -11,9 +11,31 @@ test('the nativephp patterns talk page renders', function () {
         ->assertSee('Design Patterns', false)
         ->assertSee('in NativePHP')
         ->assertSee('Design patterns under pressure in the NativePHP v4 render cycle')
+        ->assertSee('VIEW THE NATIVEPHP DOCS')
+        ->assertSee('https://nativephp.com/docs/mobile/4/architecture"', false)
+        ->assertDontSee('for Laravel developers')
         ->assertSee('Documented')
         ->assertSee('Interpretation')
         ->assertSee('Claims verified against the live NativePHP v4 docs on 2026-07-30');
+});
+
+test('the pattern list renders all nine patterns with their diagrams', function () {
+    $response = $this->get('/talks/nativephp-patterns')->assertOk();
+
+    collect([
+        'Front controller',
+        'Interpreter',
+        'Composite',
+        'Command',
+        'Structural sharing',
+        'Producer / consumer',
+        'Reconciliation',
+        'Bridge',
+        'Proxy',
+    ])->each(fn (string $pattern) => $response->assertSee($pattern));
+
+    // Ten diagram stages: one per pattern, plus the flipped second Proxy diagram.
+    expect(substr_count($response->getContent(), 'class="np-diagram__stage"'))->toBe(10);
 });
 
 test('all ten sources link to the exact urls from the citation ledger', function () {
