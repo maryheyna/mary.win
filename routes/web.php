@@ -28,6 +28,9 @@ Route::get('/', function () {
     return view('home', compact('talksLoved'));
 })->name('home');
 
+// TALKS — GIVEN: a static page per talk, summary + verified citations.
+Route::view('/talks/nativephp-patterns', 'talks.nativephp-patterns')->name('talks.nativephp-patterns');
+
 // The OMT symbols reference that previously lived at '/'.
 Route::get('/omt', function () {
     return view('welcome');

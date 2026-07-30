@@ -3,6 +3,7 @@
         ['title' => 'database-first thinking', 'when' => 'meetup ’25'],
         ['title' => 'a spreadsheet is an api if you’re brave', 'when' => 'meetup ’25'],
         ['title' => 'off-by-one: tiny word games', 'when' => 'lightning ’26'],
+        ['title' => 'one frame, nine patterns', 'when' => 'summary + sources', 'url' => route('talks.nativephp-patterns')],
     ];
 
     // $talksLoved arrives from the route: type=talk rows in the research library.
@@ -107,7 +108,11 @@
                         <div class="wr-plate__body">
                             @foreach ($talksGiven as $talk)
                                 <div class="wr-row">
-                                    <span>{{ $talk['title'] }}</span>
+                                    @if (isset($talk['url']))
+                                        <a href="{{ $talk['url'] }}" class="wr-row__name">{{ $talk['title'] }}</a>
+                                    @else
+                                        <span>{{ $talk['title'] }}</span>
+                                    @endif
                                     <span class="wr-leader" aria-hidden="true"></span>
                                     <span class="wr-row__year">{{ $talk['when'] }}</span>
                                 </div>
